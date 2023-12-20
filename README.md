@@ -39,6 +39,7 @@ Our directory is a folder called "TestingFiles" with the following files: 'poem1
    ```
 
 2. **Follow the on-screen prompts to:**
+   - Enter your server port address.
    - Connect to the tracker.
    - Select or specify files for sharing.
    - Download files from peers.
