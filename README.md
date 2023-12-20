@@ -29,7 +29,8 @@ Our directory is a folder called "TestingFiles" with the following files: 'poem1
    ```
    go run tracker.go
    ```
-   - The tracker will start on `localhost` and default port `8000`.
+   - The tracker will start on `localhost` and default port `20000`.
+   - Feel free to change the tracker IP and port number based on your machine.
 
 ### Running the Peer(client/server)
 
@@ -37,9 +38,9 @@ Our directory is a folder called "TestingFiles" with the following files: 'poem1
    ```
    go run peer.go
    ```
+   - Please enter an available port number for the peer server.
 
 2. **Follow the on-screen prompts to:**
-   - Enter your server port address.
    - Connect to the tracker.
    - Select or specify files for sharing.
    - Download files from peers.
@@ -68,15 +69,13 @@ Project Link: [https://github.com/cc459/p2p-network.git]
 
 ## Debugging
 
-- **peer connection issues**: If the port is already in use you will get a "Error starting server: address already in use" rerun run the peer.go file.
-
+- **Peer connection issues**: If the port number is already in use on your peer machine you will get a "Error starting server: address already in use". To resolve this issue, rerun the peer.go file.
 
 ### Common Issues
 - **Connection Issues**: Check if the tracker and peers are accessible over the network.
 - **File Handling**: Ensure file paths and permissions are correctly set for reading and writing files.
 - **Concurrency**: Look out for issues related to concurrent file access and data races.
 - **Input**: Please enter the file name carefully. We don't have cases handling giving error messages for incorrect input. 
-
 
 ### Integration Testing
 - Test the application components working together - such as the interaction between the peer and the tracker.
