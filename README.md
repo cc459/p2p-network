@@ -20,7 +20,7 @@ This P2P file sharing application enables users to share and download files in a
 
 ### Directory explanation
 
-Our directory is a folder called "files" with the following files: 'poem1.txt', 'poem2.txt', 'poem3.txt', 'poem4.txt', 'poem5.txt', 'poem6.txt', 'poem7.txt', 'poem8.txt', 'poem9.txt', 'poem10.txt','plants.json'. Total 11 files. Each file has a short poem about wisdom in it. The one 'plant.json' file has a list of plants in it.
+Our directory is a folder called "files" with the following files: 'poem1.txt', 'poem2.txt', 'poem3.txt', 'poem4.txt', 'poem5.txt', 'poem6.txt', 'poem7.txt', 'poem8.txt', 'poem9.txt', 'poem10.txt', 'plants.json'. In total 11 files. Each file has a short poem about wisdom in it. The one 'plant.json' file has a list of plants in it.
 
 ### Downloading the files
 
@@ -74,7 +74,7 @@ Project Link: [https://github.com/cc459/p2p-network.git]
 
 ## Debugging
 
-- **Peer connection issues**: If the port number is already in use on your peer machine you will get a "Error starting server: address already in use". To resolve this issue, rerun the peer.go file.
+- **Port Number Issues**: If the port number is already in use on your peer machine you will get a "Error starting server: address already in use". To resolve this issue, rerun the peer.go file. (Similarly, rerun the tracker.go file if the tracker port number is already in use.)
 
 ### Common Issues
 - **Connection Issues**: Check if the tracker and peers are accessible over the network.
