@@ -130,7 +130,7 @@ func main() {
 
 	// Feel free to change the tracker IP and tracker port based on your machine
 	trackerIP := "localhost"
-	trackerPort := "30000"
+	trackerPort := "29392"
 
 	// Start the tracker on the local machine ("localhost") on port "20000"
 	tracker.Start(trackerIP, trackerPort)
