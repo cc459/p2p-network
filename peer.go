@@ -1,4 +1,4 @@
-// client.go
+// peer.go
 package main
 
 import (
@@ -15,20 +15,20 @@ import (
 
 const ChunkSize = 1024 // Size of each file chunk in bytes
 
-type P2PClient struct {
+type P2PPeer struct {
 	peers          []net.Conn
 	availableFiles []string // List of available files
 }
 
-func NewP2PClient() *P2PClient {
-	return &P2PClient{
+func NewP2PPeer() *P2PPeer {
+	return &P2PPeer{
 		peers:          make([]net.Conn, 0),
 		availableFiles: make([]string, 0),
 	}
 }
 
 // Selects a random file from a directory
-func (c *P2PClient) pickRandomFile(directory string) (string, error) {
+func (c *P2PPeer) pickRandomFile(directory string) (string, error) {
 	entries, err := os.ReadDir(directory)
 	if err != nil {
 		return "", err
@@ -51,7 +51,7 @@ func (c *P2PClient) pickRandomFile(directory string) (string, error) {
 }
 
 // Starts listening for incoming connections to serve file chunks
-func (c *P2PClient) startPeerServer(port string) string {
+func (c *P2PPeer) startPeerServer(port string) string {
 	listener, err := net.Listen("tcp", ":"+port)
 	if err != nil {
 		fmt.Println("Error starting my server:", err.Error())
@@ -86,7 +86,7 @@ func (c *P2PClient) startPeerServer(port string) string {
 	}
 }
 
-func (c *P2PClient) connectToTracker(trackerHost string, trackerPort string, fileName string, myServerPort string) {
+func (c *P2PPeer) connectToTracker(trackerHost string, trackerPort string, fileName string, myServerPort string) {
 	conn, err := net.Dial("tcp", trackerHost+":"+trackerPort)
 	if err != nil {
 		fmt.Println("Error connecting to tracker:", err.Error())
@@ -122,7 +122,7 @@ func (c *P2PClient) connectToTracker(trackerHost string, trackerPort string, fil
 	}
 }
 
-func (c *P2PClient) requestFileFromTracker(trackerHost string, trackerPort string, fileName string) string {
+func (c *P2PPeer) requestFileFromTracker(trackerHost string, trackerPort string, fileName string) string {
 	conn, err := net.Dial("tcp", trackerHost+":"+trackerPort)
 	if err != nil {
 		fmt.Println("Error connecting to tracker:", err.Error())
@@ -152,7 +152,7 @@ func (c *P2PClient) requestFileFromTracker(trackerHost string, trackerPort strin
 	return response
 }
 
-func (c *P2PClient) connectToPeer(peerHost string, peerPort string) {
+func (c *P2PPeer) connectToPeer(peerHost string, peerPort string) {
 	conn, err := net.Dial("tcp", peerHost+":"+peerPort)
 	if err != nil {
 		fmt.Println("Error connecting to peer:", err.Error())
@@ -162,7 +162,7 @@ func (c *P2PClient) connectToPeer(peerHost string, peerPort string) {
 	fmt.Println("Connected to peer at " + peerHost + ":" + peerPort)
 }
 
-func (c *P2PClient) downloadFile(peerConn net.Conn, fileName string, totalChunks int) {
+func (c *P2PPeer) downloadFile(peerConn net.Conn, fileName string, totalChunks int) {
 	outFile, err := os.Create(fileName)
 	if err != nil {
 		fmt.Println("Error creating file:", err.Error())
@@ -201,7 +201,7 @@ func (c *P2PClient) downloadFile(peerConn net.Conn, fileName string, totalChunks
 	fmt.Println("Download complete for file:", fileName)
 }
 
-func (c *P2PClient) serveFileChunk(conn net.Conn, fileName string, chunkIndex int) {
+func (c *P2PPeer) serveFileChunk(conn net.Conn, fileName string, chunkIndex int) {
 	file, err := os.Open(fileName)
 	if err != nil {
 		fmt.Println("Error opening file:", err.Error())
@@ -235,7 +235,7 @@ func (c *P2PClient) serveFileChunk(conn net.Conn, fileName string, chunkIndex in
 }
 
 func main() {
-	client := NewP2PClient()
+	peer := NewP2PPeer()
 
 	reader := bufio.NewReader(os.Stdin) // User input
 
@@ -245,7 +245,7 @@ func main() {
 	port = strings.TrimSpace(port)
 
 	// Start the peer server in a separate goroutine
-	go client.startPeerServer(port)
+	go peer.startPeerServer(port)
 
 	time.Sleep(3 * time.Second) // delay so that messages will not overly
 
@@ -258,7 +258,7 @@ func main() {
 	trackerPort = strings.TrimSpace(trackerPort)
 
 	// Pick a random file from a specified directory
-	selectedFile, err := client.pickRandomFile("files")
+	selectedFile, err := peer.pickRandomFile("files")
 	if err != nil {
 		fmt.Println("Error selecting my file:", err.Error())
 		return
@@ -267,11 +267,11 @@ func main() {
 	fmt.Println("My selected file:", selectedFile)
 	fileName := selectedFile
 
-	client.connectToTracker(trackerHost, trackerPort, fileName, port)
+	peer.connectToTracker(trackerHost, trackerPort, fileName, port)
 	// for _, peer := range peers {
 	// 	if peer != "" {
 	// 		hostPort := strings.Split(peer, ":")
-	// 		client.connectToPeer(hostPort[0], hostPort[1])
+	// 		peer.connectToPeer(hostPort[0], hostPort[1])
 	// 	}
 	// }
 
@@ -300,7 +300,7 @@ func main() {
 		fileName := requestedFile
 		totalChunks := 10 // Potentially revise
 
-		peerInfo := client.requestFileFromTracker(trackerHost, trackerPort, fileName)
+		peerInfo := peer.requestFileFromTracker(trackerHost, trackerPort, fileName)
 		fmt.Println("Here is the information for the peer who has the file you are requesting:", peerInfo)
 		if peerInfo != "" {
 			hostPort := strings.Split(peerInfo, ":")
@@ -309,7 +309,7 @@ func main() {
 				fmt.Println("Error connecting to peer:", err.Error())
 				continue
 			}
-			client.downloadFile(peerConn, fileName, totalChunks)
+			peer.downloadFile(peerConn, fileName, totalChunks)
 			peerConn.Close()
 		} else {
 			fmt.Println("No peer information available for the requested file.")
