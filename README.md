@@ -20,7 +20,7 @@ This P2P file sharing application enables users to share and download files in a
 
 ### Directory explanation
 
-Our directory is a folder with the following files: 'poem1.txt', 'poem2.txt', 'poem3.txt', 'poem4.txt', 'poem5.txt', 'poem6.txt', 'poem7.txt', 'poem8.txt', 'poem9.txt', 'poem10.txt','plants.json'. Total 11 files. Each file has a short poem about wisdom in it. The one 'plant.json' file has a list of plants in it.
+Our directory is a folder called "TestingFiles" with the following files: 'poem1.txt', 'poem2.txt', 'poem3.txt', 'poem4.txt', 'poem5.txt', 'poem6.txt', 'poem7.txt', 'poem8.txt', 'poem9.txt', 'poem10.txt','plants.json'. Total 11 files. Each file has a short poem about wisdom in it. The one 'plant.json' file has a list of plants in it.
 
 
 ### Running the Tracker
