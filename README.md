@@ -20,8 +20,13 @@ This P2P file sharing application enables users to share and download files in a
 
 ### Directory explanation
 
-Our directory is a folder called "TestingFiles" with the following files: 'poem1.txt', 'poem2.txt', 'poem3.txt', 'poem4.txt', 'poem5.txt', 'poem6.txt', 'poem7.txt', 'poem8.txt', 'poem9.txt', 'poem10.txt','plants.json'. Total 11 files. Each file has a short poem about wisdom in it. The one 'plant.json' file has a list of plants in it.
+Our directory is a folder called "files" with the following files: 'poem1.txt', 'poem2.txt', 'poem3.txt', 'poem4.txt', 'poem5.txt', 'poem6.txt', 'poem7.txt', 'poem8.txt', 'poem9.txt', 'poem10.txt','plants.json'. Total 11 files. Each file has a short poem about wisdom in it. The one 'plant.json' file has a list of plants in it.
 
+### Downloading the files
+
+Download the tracker.go file and the peer.go file and store them in separate folders.
+
+In addition, please download the directory before you start. Alternatively, you may create your own folder titled "files" in which to add short text files. Put this folder in the same folder as the peer.go file.
 
 ### Running the Tracker
 
@@ -41,9 +46,9 @@ Our directory is a folder called "TestingFiles" with the following files: 'poem1
    - Please enter an available port number for the peer server.
 
 2. **Follow the on-screen prompts to:**
-   - Connect to the tracker.
-   - Select or specify files for sharing.
-   - Download files from peers.
+   - Connect to the tracker. (Enter the tracker IP and port).
+   - Select or specify files for sharing. (For example, enter "poem1.txt" without the quotations to download poem1.txt")
+   - Download files from peers. (Receive the file in chunks)
 
 ## Usage Example
 
