@@ -8,7 +8,6 @@ This P2P file sharing application enables users to share and download files in a
 
 - **File Chunking**: Efficient file sharing by breaking down files into manageable chunks.
 - **Tracker-based Peer Discovery**: Utilizes a tracker for managing and discovering peers with desired files.
-- **Concurrent Chunk Download**: Supports downloading different chunks of the same file concurrently from multiple peers.
 - **Basic Error Handling**: Handles common network errors and file I/O issues.
 
 ## Getting Started
