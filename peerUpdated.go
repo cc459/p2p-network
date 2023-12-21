@@ -372,7 +372,7 @@ func main() {
 		return
 	}
 
-	fmt.Println("My initial selected file:", selectedFile)
+	fmt.Println("My selected file:", selectedFile)
 	fileName := selectedFile
 
 	// Initiate connection to tracker
